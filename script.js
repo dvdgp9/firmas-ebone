@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const previousSignaturesDiv = document.getElementById('previous-signatures');
     const branchSelectorDiv = document.getElementById('branch-selector');
     const hiddenBranchInput = document.getElementById('selected_branch');
+    // Modal elements
+    const signatureModal = document.getElementById('signature-modal');
+    const modalDialog = signatureModal ? signatureModal.querySelector('.modal-dialog') : null;
+    const modalCloseBtn = signatureModal ? signatureModal.querySelector('.modal-close') : null;
+    const modalSignatureContainer = document.getElementById('modal-signature-container');
 
     // --- Branch Button Logic ---
     branchSelectorDiv.addEventListener('click', (event) => {
@@ -52,6 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Maybe reload previous signatures in case the new one matches an old one?
                 // Or add it to previous signatures automatically after some time/action?
                 // For now, just displays in the new section.
+
+                // Also show the same content nicely in a modal
+                if (signatureModal && modalSignatureContainer) {
+                    clearElement(modalSignatureContainer);
+                    displaySignature(result.html, result.password, result.filename, modalSignatureContainer);
+                    openModal();
+                }
             } else {
                 alert(`Error: ${result.error || 'No se pudo generar la firma.'}`);
             }
@@ -66,6 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearContainer(containerElement) {
         while (containerElement.children.length > 1) { // Keep the H2
             containerElement.removeChild(containerElement.lastChild);
+        }
+    }
+
+    // --- Clear all children helper ---
+    function clearElement(element) {
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
         }
     }
 
@@ -234,4 +253,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initially hide the newly generated section
     newlyGeneratedDiv.style.display = 'none';
 
+    // --- Modal logic ---
+    function openModal() {
+        signatureModal.classList.add('show');
+        signatureModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+        signatureModal.classList.remove('show');
+        signatureModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+    }
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeModal);
+    }
+
+    if (signatureModal) {
+        // Close when clicking outside the dialog
+        signatureModal.addEventListener('click', (e) => {
+            if (e.target === signatureModal) {
+                closeModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && signatureModal && signatureModal.classList.contains('show')) {
+            closeModal();
+        }
+    });
 });

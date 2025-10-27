@@ -77,6 +77,21 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         <!-- Existing signatures will be loaded here -->
     </div>
 
+    <!-- Modal para mostrar la firma generada de forma destacada -->
+    <div id="signature-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="modal-close" aria-label="Cerrar">×</button>
+            <h2 id="modal-title">Tu firma generada</h2>
+            <p class="modal-helper">
+                Sigue la guía para añadirla al Webmail:
+                <a href="https://wiki.ebone.es/docs/como-anadir-la-firma-en-el-grupo-ebone-cualquier-linea-al-webmail/" target="_blank">Abrir guía</a>
+            </p>
+            <div id="modal-signature-container" class="modal-signature-container">
+                <!-- Aquí se inyecta la misma vista que abajo: código + vista previa + copiar -->
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

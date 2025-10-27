@@ -22,21 +22,21 @@ El objetivo es enlazar el proyecto local `creador-firmas-ebone/` con el reposito
 
 # Project Status Board
 
-- [ ] Inicializar repo Git local
-- [ ] Crear rama main
-- [ ] Añadir remoto origin
-- [ ] Commit inicial
-- [ ] Push a origin/main
+- [x] Inicializar repo Git local
+- [x] Crear rama main
+- [x] Añadir remoto origin
+- [x] Commit inicial
+- [x] Push a origin/main
 
 # Current Status / Progress Tracking
 
 - Modo: Executor
-- Inicio: Preparación del entorno y plan creado.
+- Repo local inicializado, remoto `origin` configurado, commit inicial creado y push a `origin/main` completado.
 
 # Executor's Feedback or Assistance Requests
 
-- ¿Deseas incluir `.gitignore` antes del commit inicial? Si sí, indica el stack (por ejemplo Node, PHP, etc.) para generarlo adecuado.
+- Siguiente paso recomendado: añadir un `.gitignore` adecuado (stack PHP) y eliminar `/.DS_Store` del repo con un commit de limpieza.
 
 # Lessons
 
-- N/A por ahora.
+- Evitar commitear archivos de sistema como `.DS_Store`; añadirlos al `.gitignore` desde el inicio.
