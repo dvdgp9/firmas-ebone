@@ -59,11 +59,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <input type="tel" id="phone" name="phone" required>
         </div>
 
-        <div class="form-field-group">
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
         <button type="submit">Generar Firma</button>
     </form>
 

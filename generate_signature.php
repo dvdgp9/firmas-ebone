@@ -23,11 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $position = $_POST['position'] ?? '';
     $email = $_POST['email'] ?? '';
     $phone = $_POST['phone'] ?? '';
-    $password = $_POST['password'] ?? '';
     $branch = $_POST['branch'] ?? '';
 
     // Basic validation
-    if (empty($name) || empty($position) || empty($email) || empty($phone) || empty($password) || empty($branch)) {
+    if (empty($name) || empty($position) || empty($email) || empty($phone) || empty($branch)) {
         http_response_code(400); // Bad Request
         echo json_encode(['error' => 'Todos los campos son obligatorios.']);
         exit;
@@ -120,12 +119,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Return success response with the *fragment* HTML and password
+    // Return success response with the *fragment* HTML
     echo json_encode([
         'success' => true,
         'filename' => $filename,
-        'html' => $generated_html_fragment, // Return the FRAGMENT for immediate display
-        'password' => $password
+        'html' => $generated_html_fragment // Return the FRAGMENT for immediate display
     ]);
 
 } else {

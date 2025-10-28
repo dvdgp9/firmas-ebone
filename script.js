@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok && result.success) {
                 // Clear previous new signature and display the new one
                 clearContainer(newlyGeneratedDiv);
-                displaySignature(result.html, result.password, result.filename, newlyGeneratedDiv);
+                displaySignature(result.html, null, result.filename, newlyGeneratedDiv);
                 newlyGeneratedDiv.style.display = 'block'; // Ensure section is visible
                 // form.reset(); // Remove this line to keep form values
                 // Mantener también la vista inferior, además del modal.
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Also show the same content nicely in a modal
                 if (signatureModal && modalSignatureContainer) {
                     clearElement(modalSignatureContainer);
-                    displaySignature(result.html, result.password, result.filename, modalSignatureContainer);
+                    displaySignature(result.html, null, result.filename, modalSignatureContainer);
                     openModal();
                 }
             } else {
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         signatureDetails.appendChild(signaturePreview);
 
         // --- Conditionally Display Password ---
-        if (password !== null) {
+        if (password) {
             const passwordTitle = document.createElement('h4');
             passwordTitle.textContent = 'Contraseña Email:';
             const passwordDisplay = document.createElement('p');
