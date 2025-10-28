@@ -103,9 +103,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         <h4>Apps (Outlook, Mail, Thunderbird)</h4>
                         <p class="hint">Copia la vista previa y pégala en tu cliente.</p>
                         <div class="action-buttons">
-                            <button id="btn-copy-preview" class="primary">Copiar vista previa</button>
-                            <button id="btn-copy-preview-alt" class="secondary">Copiar (método alternativo)</button>
-                            <button id="btn-open-preview-window" class="secondary">Abrir en ventana</button>
+                            <button id="btn-copy-preview-alt" class="primary">Copiar vista previa</button>
                         </div>
                     </div>
                 </div>

@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCloseBtn = signatureModal ? signatureModal.querySelector('.modal-close') : null;
     const modalSignatureContainer = document.getElementById('modal-signature-container');
     const btnCopyHtml = document.getElementById('btn-copy-html');
-    const btnCopyPreview = document.getElementById('btn-copy-preview');
     const btnCopyPreviewAlt = document.getElementById('btn-copy-preview-alt');
-    const btnOpenPreviewWindow = document.getElementById('btn-open-preview-window');
     const toastContainer = document.getElementById('toast-container');
     let lastFilename = null;
 
@@ -251,15 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (btnCopyPreview) {
-        btnCopyPreview.addEventListener('click', async () => {
-            const prev = signatureModal.querySelector('.signature-preview');
-            if (!prev) { showToast('No se encontró la vista previa', 'error'); return; }
-            const ok = await copyHtmlFromElement(prev);
-            showToast(ok ? 'Vista previa copiada' : 'Error al copiar vista previa', ok ? 'success' : 'error');
-        });
-    }
-
     if (btnCopyPreviewAlt) {
         // Alternative: select the actual DOM in modal and execute copy
         btnCopyPreviewAlt.addEventListener('click', async () => {
@@ -274,19 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
             try { ok = document.execCommand('copy'); } catch { ok = false; }
             sel.removeAllRanges();
             showToast(ok ? 'Vista previa copiada (alt)' : 'No se pudo copiar con el método alternativo', ok ? 'success' : 'error');
-        });
-    }
-
-    if (btnOpenPreviewWindow) {
-        btnOpenPreviewWindow.addEventListener('click', () => {
-            const prev = signatureModal.querySelector('.signature-preview');
-            if (!prev) { showToast('No se encontró la vista previa', 'error'); return; }
-            const w = window.open('', '_blank');
-            if (!w) { showToast('Bloqueado por el navegador', 'error'); return; }
-            w.document.open();
-            w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Firma</title></head><body>${prev.innerHTML}</body></html>`);
-            w.document.close();
-            showToast('Abierto en una nueva ventana');
         });
     }
 
