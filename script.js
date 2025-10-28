@@ -98,6 +98,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function copyHtmlFromElement(element) {
+        const html = element.innerHTML;
+        const plain = element.innerText || element.textContent || '';
+        try {
+            if (navigator.clipboard && window.ClipboardItem) {
+                const item = new ClipboardItem({
+                    'text/html': new Blob([html], { type: 'text/html' }),
+                    'text/plain': new Blob([plain], { type: 'text/plain' })
+                });
+                await navigator.clipboard.write([item]);
+                return true;
+            }
+        } catch (e) {
+            // fall through to fallback
+        }
+        // Fallback: use contenteditable selection to copy rich HTML
+        const helper = document.createElement('div');
+        helper.contentEditable = 'true';
+        helper.style.position = 'fixed';
+        helper.style.left = '-9999px';
+        helper.innerHTML = html;
+        document.body.appendChild(helper);
+        const range = document.createRange();
+        range.selectNodeContents(helper);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch { ok = false; }
+        sel.removeAllRanges();
+        document.body.removeChild(helper);
+        return ok;
+    }
+
     // --- Clear all children helper ---
     function clearElement(element) {
         while (element.firstChild) {
@@ -224,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnCopyPreview.addEventListener('click', async () => {
             const prev = signatureModal.querySelector('.signature-preview');
             if (!prev) { showToast('No se encontró la vista previa', 'error'); return; }
-            const ok = await copyText(prev.innerHTML);
+            const ok = await copyHtmlFromElement(prev);
             showToast(ok ? 'Vista previa copiada' : 'Error al copiar vista previa', ok ? 'success' : 'error');
         });
     }
