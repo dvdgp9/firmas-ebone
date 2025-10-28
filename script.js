@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let ok = false;
             try { ok = document.execCommand('copy'); } catch { ok = false; }
             sel.removeAllRanges();
-            showToast(ok ? 'Vista previa copiada (alt)' : 'No se pudo copiar con el método alternativo', ok ? 'success' : 'error');
+            showToast(ok ? 'Vista previa copiada' : 'No se pudo copiar con el método alternativo', ok ? 'success' : 'error');
         });
     }
 
