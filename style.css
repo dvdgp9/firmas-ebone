@@ -294,6 +294,7 @@ hr {
     overflow: auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     padding: 24px;
+    position: relative; /* keep close button inside */
 }
 
 .modal-close {
@@ -301,18 +302,40 @@ hr {
     top: 12px;
     right: 12px;
     border: none;
-    background: transparent;
-    font-size: 24px;
-    line-height: 1;
+    background: #eef6f8;
+    color: #0f4953;
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    line-height: 36px;
     cursor: pointer;
 }
 
 .modal-helper {
-    margin-top: -8px;
-    color: #666;
+    margin-top: -4px;
+    color: #234;
+    background: #e8f7fb;
+    border: 1px solid #b9e4ee;
+    border-left: 4px solid var(--primary-color);
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
+.modal-helper a { color: var(--primary-color); text-decoration: none; }
 
-.modal-helper a { color: var(--primary-color); }
+.guide-button {
+    background: var(--primary-color);
+    color: #fff !important;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    display: inline-block;
+}
+.guide-button:hover { filter: brightness(0.92); }
 
 .modal-signature-container .delete-button { display: none; }
 
