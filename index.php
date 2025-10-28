@@ -96,7 +96,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         <p class="hint">Pega el HTML en el editor de Webmail.</p>
                         <div class="action-buttons">
                             <button id="btn-copy-html" class="primary">Copiar HTML</button>
-                            <a id="btn-download-html" class="secondary" href="#" download>Descargar .html</a>
+                            <a id="btn-open-guide" class="secondary" href="https://wiki.ebone.es/docs/como-anadir-la-firma-en-el-grupo-ebone-cualquier-linea-al-webmail/" target="_blank">Abrir guía</a>
                         </div>
                     </div>
                     <div class="action-card" id="apps-card">
@@ -104,6 +104,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         <p class="hint">Copia la vista previa y pégala en tu cliente.</p>
                         <div class="action-buttons">
                             <button id="btn-copy-preview" class="primary">Copiar vista previa</button>
+                            <button id="btn-copy-preview-alt" class="secondary">Copiar (método alternativo)</button>
+                            <button id="btn-open-preview-window" class="secondary">Abrir en ventana</button>
                         </div>
                     </div>
                 </div>

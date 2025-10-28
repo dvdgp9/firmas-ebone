@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalSignatureContainer = document.getElementById('modal-signature-container');
     const btnCopyHtml = document.getElementById('btn-copy-html');
     const btnCopyPreview = document.getElementById('btn-copy-preview');
-    const btnDownloadHtml = document.getElementById('btn-download-html');
+    const btnCopyPreviewAlt = document.getElementById('btn-copy-preview-alt');
+    const btnOpenPreviewWindow = document.getElementById('btn-open-preview-window');
     const toastContainer = document.getElementById('toast-container');
     let lastFilename = null;
 
@@ -75,10 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (signatureModal && modalSignatureContainer) {
                     clearElement(modalSignatureContainer);
                     displaySignature(result.html, null, result.filename, modalSignatureContainer);
-                    // Update download link
-                    if (btnDownloadHtml) {
-                        btnDownloadHtml.href = `signatures/${result.filename}`;
-                    }
                     openModal();
                 }
             } else {
@@ -263,12 +260,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (btnDownloadHtml) {
-        btnDownloadHtml.addEventListener('click', (e) => {
-            if (!lastFilename) {
-                e.preventDefault();
-                showToast('Genera una firma primero', 'error');
-            }
+    if (btnCopyPreviewAlt) {
+        // Alternative: select the actual DOM in modal and execute copy
+        btnCopyPreviewAlt.addEventListener('click', async () => {
+            const prev = signatureModal.querySelector('.signature-preview');
+            if (!prev) { showToast('No se encontró la vista previa', 'error'); return; }
+            const range = document.createRange();
+            range.selectNodeContents(prev);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            let ok = false;
+            try { ok = document.execCommand('copy'); } catch { ok = false; }
+            sel.removeAllRanges();
+            showToast(ok ? 'Vista previa copiada (alt)' : 'No se pudo copiar con el método alternativo', ok ? 'success' : 'error');
+        });
+    }
+
+    if (btnOpenPreviewWindow) {
+        btnOpenPreviewWindow.addEventListener('click', () => {
+            const prev = signatureModal.querySelector('.signature-preview');
+            if (!prev) { showToast('No se encontró la vista previa', 'error'); return; }
+            const w = window.open('', '_blank');
+            if (!w) { showToast('Bloqueado por el navegador', 'error'); return; }
+            w.document.open();
+            w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Firma</title></head><body>${prev.innerHTML}</body></html>`);
+            w.document.close();
+            showToast('Abierto en una nueva ventana');
         });
     }
 
