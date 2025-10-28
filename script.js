@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalDialog = signatureModal ? signatureModal.querySelector('.modal-dialog') : null;
     const modalCloseBtn = signatureModal ? signatureModal.querySelector('.modal-close') : null;
     const modalSignatureContainer = document.getElementById('modal-signature-container');
+    const btnCopyHtml = document.getElementById('btn-copy-html');
+    const btnCopyPreview = document.getElementById('btn-copy-preview');
+    const btnDownloadHtml = document.getElementById('btn-download-html');
+    const toastContainer = document.getElementById('toast-container');
+    let lastFilename = null;
 
     // --- Branch Button Logic ---
     branchSelectorDiv.addEventListener('click', (event) => {
@@ -20,6 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
             hiddenBranchInput.value = event.target.dataset.branch;
             // Optional: Clear form or take other actions when branch changes
         }
+    });
+
+    // --- LocalStorage persistence ---
+    const fields = ['name','position','email','phone'];
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const saved = localStorage.getItem(`sig_${id}`);
+        if (saved) el.value = saved;
+        el.addEventListener('input', () => localStorage.setItem(`sig_${id}`, el.value));
     });
 
     // --- Form Submission Logic ---
@@ -48,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             statusDiv.remove(); // Remove loading message
 
             if (response.ok && result.success) {
+                lastFilename = result.filename;
                 // Clear previous new signature and display the new one
                 clearContainer(newlyGeneratedDiv);
                 displaySignature(result.html, null, result.filename, newlyGeneratedDiv);
@@ -59,6 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (signatureModal && modalSignatureContainer) {
                     clearElement(modalSignatureContainer);
                     displaySignature(result.html, null, result.filename, modalSignatureContainer);
+                    // Update download link
+                    if (btnDownloadHtml) {
+                        btnDownloadHtml.href = `signatures/${result.filename}`;
+                    }
                     openModal();
                 }
             } else {
@@ -160,6 +180,62 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add to the specified target container
         targetContainer.appendChild(signatureContainer);
+    }
+
+    // --- Toast helpers ---
+    function showToast(message, type='success') {
+        if (!toastContainer) return;
+        const t = document.createElement('div');
+        t.className = `toast ${type}`;
+        t.textContent = message;
+        toastContainer.appendChild(t);
+        setTimeout(() => { t.classList.add('show'); }, 10);
+        setTimeout(() => { t.classList.remove('show'); t.remove(); }, 2500);
+    }
+
+    async function copyText(text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch (e) {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            let ok = false;
+            try { ok = document.execCommand('copy'); } catch { ok = false; }
+            document.body.removeChild(ta);
+            return ok;
+        }
+    }
+
+    // --- Modal actions ---
+    if (btnCopyHtml) {
+        btnCopyHtml.addEventListener('click', async () => {
+            const ta = signatureModal.querySelector('.raw-html-textarea');
+            if (!ta) { showToast('No se encontró el HTML', 'error'); return; }
+            const ok = await copyText(ta.value);
+            showToast(ok ? 'HTML copiado' : 'Error al copiar HTML', ok ? 'success' : 'error');
+        });
+    }
+
+    if (btnCopyPreview) {
+        btnCopyPreview.addEventListener('click', async () => {
+            const prev = signatureModal.querySelector('.signature-preview');
+            if (!prev) { showToast('No se encontró la vista previa', 'error'); return; }
+            const ok = await copyText(prev.innerHTML);
+            showToast(ok ? 'Vista previa copiada' : 'Error al copiar vista previa', ok ? 'success' : 'error');
+        });
+    }
+
+    if (btnDownloadHtml) {
+        btnDownloadHtml.addEventListener('click', (e) => {
+            if (!lastFilename) {
+                e.preventDefault();
+                showToast('Genera una firma primero', 'error');
+            }
+        });
     }
 
     // --- Delete Signature Function (works with newly generated container) ---

@@ -88,6 +88,37 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <div id="modal-signature-container" class="modal-signature-container">
                 <!-- Aquí se inyecta la misma vista que abajo: código + vista previa + copiar -->
             </div>
+            <div class="modal-actions">
+                <h3>¿Dónde vas a usar esta firma?</h3>
+                <div class="actions-row">
+                    <div class="action-card" id="webmail-card">
+                        <h4>Webmail</h4>
+                        <p class="hint">Pega el HTML en el editor de Webmail.</p>
+                        <div class="action-buttons">
+                            <button id="btn-copy-html" class="primary">Copiar HTML</button>
+                            <a id="btn-download-html" class="secondary" href="#" download>Descargar .html</a>
+                        </div>
+                    </div>
+                    <div class="action-card" id="apps-card">
+                        <h4>Apps (Outlook, Mail, Thunderbird)</h4>
+                        <p class="hint">Copia la vista previa y pégala en tu cliente.</p>
+                        <div class="action-buttons">
+                            <button id="btn-copy-preview" class="primary">Copiar vista previa</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq">
+                    <details>
+                        <summary>¿Problemas frecuentes?</summary>
+                        <ul>
+                            <li>Outlook: usa “Pegar especial > HTML” si se pierde formato.</li>
+                            <li>Webmail: activa el modo HTML antes de pegar.</li>
+                            <li>Si no ves imágenes: revisa el bloqueo de descargas externas.</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+            <div id="toast-container" class="toast-container"></div>
         </div>
     </div>
 
