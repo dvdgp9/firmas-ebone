@@ -337,6 +337,9 @@ hr {
 }
 .guide-button:hover { filter: brightness(0.92); }
 
+.helper-left { display: inline-flex; align-items: center; gap: 8px; }
+.guide-icon { color: var(--primary-color); }
+
 .modal-signature-container .delete-button { display: none; }
 
 body.modal-open { overflow: hidden; }

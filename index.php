@@ -80,7 +80,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <button class="modal-close" aria-label="Cerrar">×</button>
             <h2 id="modal-title">Tu firma generada</h2>
             <p class="modal-helper">
-                <span>🛈 Sigue esta guía para añadir tu firma al Webmail:</span>
+                <span class="helper-left">
+                    <svg class="guide-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M12 8h.01"></path>
+                        <path d="M11.5 12h1v4h-1"></path>
+                    </svg>
+                    <span>Sigue esta guía para añadir tu firma al Webmail:</span>
+                </span>
                 <a class="guide-button" href="https://wiki.ebone.es/docs/como-anadir-la-firma-en-el-grupo-ebone-cualquier-linea-al-webmail/" target="_blank">Abrir guía</a>
             </p>
             <div id="modal-signature-container" class="modal-signature-container">
