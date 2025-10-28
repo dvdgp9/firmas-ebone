@@ -107,16 +107,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         </div>
                     </div>
                 </div>
-                <div class="faq">
-                    <details>
-                        <summary>¿Problemas frecuentes?</summary>
-                        <ul>
-                            <li>Outlook: usa “Pegar especial > HTML” si se pierde formato.</li>
-                            <li>Webmail: activa el modo HTML antes de pegar.</li>
-                            <li>Si no ves imágenes: revisa el bloqueo de descargas externas.</li>
-                        </ul>
-                    </details>
-                </div>
             </div>
             <div id="toast-container" class="toast-container"></div>
         </div>
