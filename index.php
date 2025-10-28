@@ -72,10 +72,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         <!-- Newly generated signature will appear here -->
     </div>
 
-    <div id="previous-signatures">
-        <h2>Firmas Anteriores</h2>
-        <!-- Existing signatures will be loaded here -->
-    </div>
+    
 
     <!-- Modal para mostrar la firma generada de forma destacada -->
     <div id="signature-modal" class="modal-overlay" aria-hidden="true">

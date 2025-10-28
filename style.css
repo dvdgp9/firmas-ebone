@@ -148,16 +148,14 @@ button[type="submit"]:hover {
     background-color: #1c8a9e; /* Darker shade of primary */
 }
 
-#newly-generated-signature,
-#previous-signatures { /* Updated selector */
+#newly-generated-signature {
     margin-top: 40px;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
 
-#newly-generated-signature h2,
-#previous-signatures h2 { /* Updated selector */
+#newly-generated-signature h2 {
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 10px;
     margin-bottom: 20px;

@@ -27,15 +27,19 @@ El objetivo es enlazar el proyecto local `creador-firmas-ebone/` con el reposito
 - [x] Añadir remoto origin
 - [x] Commit inicial
 - [x] Push a origin/main
+- [x] Implementar modal para firma generada con enlace a guía de Webmail
+- [x] Eliminar sección "Firmas Anteriores" y su lógica asociada por privacidad
 
 # Current Status / Progress Tracking
 
 - Modo: Executor
 - Repo local inicializado, remoto `origin` configurado, commit inicial creado y push a `origin/main` completado.
+- Modal implementado y probado. Sección de "Firmas Anteriores" eliminada del UI/JS/CSS para mejorar privacidad.
 
 # Executor's Feedback or Assistance Requests
 
 - Siguiente paso recomendado: añadir un `.gitignore` adecuado (stack PHP) y eliminar `/.DS_Store` del repo con un commit de limpieza.
+- Proponer commit y push de los cambios del modal y la retirada de "Firmas Anteriores".
 
 # Lessons
 
