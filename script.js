@@ -158,12 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         signatureContainer.appendChild(signatureDetails);
 
-        // Add a separator (only needed for previous signatures)
-        if (targetContainer === previousSignaturesDiv) {
-            const separator = document.createElement('hr');
-            signatureContainer.appendChild(separator);
-        }
-
         // Add to the specified target container
         targetContainer.appendChild(signatureContainer);
     }
