@@ -34,6 +34,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         <button data-branch="ebone_servicios" class="branch-button">Ebone Servicios</button>
         <button data-branch="cubofit" class="branch-button">CUBOFIT</button>
         <button data-branch="uniges3" class="branch-button">Uniges-3</button>
+        <button data-branch="firma_navidad" class="branch-button">Firma Navidad</button>
     </div>
 
     <form id="signature-form">

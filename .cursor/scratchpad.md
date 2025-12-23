@@ -1,6 +1,6 @@
 # Background and Motivation
 
-El objetivo es enlazar el proyecto local `creador-firmas-ebone/` con el repositorio remoto vacío `https://github.com/dvdgp9/firmas-ebone.git` y publicar un commit inicial en la rama `main`.
+Crear una nueva firma “Firma Navidad” basada en la plantilla actual de Grupo Ebone sustituyendo el logo por la imagen navideña proporcionada, y exponerla como opción generable en la aplicación.
 
 # Key Challenges and Analysis
 
@@ -9,32 +9,27 @@ El objetivo es enlazar el proyecto local `creador-firmas-ebone/` con el reposito
 
 # High-level Task Breakdown
 
-1) Inicializar repositorio Git local en `creador-firmas-ebone/`.
-   - Success: `git rev-parse --is-inside-work-tree` devuelve true.
-2) Crear/forzar rama `main`.
-   - Success: `git branch --show-current` muestra `main`.
-3) Añadir remoto `origin` apuntando a `https://github.com/dvdgp9/firmas-ebone.git`.
-   - Success: `git remote -v` lista `origin` con URL correcta.
-4) Añadir archivos y crear commit inicial.
-   - Success: `git log -n 1` muestra el commit con mensaje esperado.
-5) Hacer push inicial y establecer upstream a `main`.
-   - Success: `git status` limpio y `git branch -vv` muestra `origin/main`.
+1) Revisar plantilla actual de Grupo Ebone y la lógica de selección/generación para usarla como base.
+   - Success: ubicadas plantilla y branch correspondiente en backend/frontend.
+2) Crear plantilla “firma_navidad” clonada de Grupo Ebone reemplazando el logo por la imagen navideña (archivo local o URL).
+   - Success: nuevo archivo en `templates/` con placeholders funcionales y nueva imagen.
+3) Añadir opción de branch “firma_navidad” en UI y en `generate_signature.php`.
+   - Success: botón visible/seleccionable, switch del backend acepta branch y genera con la nueva plantilla.
+4) Probar generación y guardado.
+   - Success: firma renderiza con imagen navideña y se guarda con nombre `*-firma_navidad-*.html`.
 
 # Project Status Board
 
-- [x] Inicializar repo Git local
-- [x] Crear rama main
-- [x] Añadir remoto origin
-- [x] Commit inicial
-- [x] Push a origin/main
-- [x] Implementar modal para firma generada con enlace a guía de Webmail
-- [x] Eliminar sección "Firmas Anteriores" y su lógica asociada por privacidad
+- [ ] Revisar plantilla y lógica de Grupo Ebone como base
+- [x] Crear plantilla “firma_navidad” con imagen navideña
+- [x] Exponer branch “firma_navidad” en UI y backend
+- [ ] Probar generación/guardado de “firma_navidad”
 
 # Current Status / Progress Tracking
 
 - Modo: Executor
-- Repo local inicializado, remoto `origin` configurado, commit inicial creado y push a `origin/main` completado.
-- Modal implementado y probado. Sección de "Firmas Anteriores" eliminada del UI/JS/CSS para mejorar privacidad.
+- Nueva tarea en curso: añadir firma “Firma Navidad”.
+- Avances: clonada plantilla `grupo_ebone` a `templates/firma_navidad.html` reemplazando el logo por `https://ebone.es/wp-content/uploads/2025/12/firma-navidad.png`. Añadido branch en UI (botón) y en switch de `generate_signature.php`.
 
 # Executor's Feedback or Assistance Requests
 

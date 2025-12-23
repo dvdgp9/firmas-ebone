@@ -47,6 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 'uniges3':
             $template_path = 'templates/uniges3.html';
             break;
+        case 'firma_navidad':
+            $template_path = 'templates/firma_navidad.html';
+            break;
         default:
             http_response_code(400); // Bad Request
             echo json_encode(['error' => 'Delegación seleccionada no válida.']);
