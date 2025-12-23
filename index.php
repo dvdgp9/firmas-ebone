@@ -30,15 +30,15 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
     <div id="branch-selector" class="branch-selector">
         <h3>Línea de Negocio:</h3>
-        <button data-branch="grupo_ebone" class="branch-button active">Grupo Ebone</button>
+        <button data-branch="firma_navidad" class="branch-button active">Firma Navidad</button>
+        <button data-branch="grupo_ebone" class="branch-button">Grupo Ebone</button>
         <button data-branch="ebone_servicios" class="branch-button">Ebone Servicios</button>
         <button data-branch="cubofit" class="branch-button">CUBOFIT</button>
         <button data-branch="uniges3" class="branch-button">Uniges-3</button>
-        <button data-branch="firma_navidad" class="branch-button">Firma Navidad</button>
     </div>
 
     <form id="signature-form">
-        <input type="hidden" id="selected_branch" name="branch" value="grupo_ebone"> <!-- Hidden input to store selected branch -->
+        <input type="hidden" id="selected_branch" name="branch" value="firma_navidad"> <!-- Hidden input to store selected branch -->
 
         <div class="form-field-group">
             <label for="name">Nombre:</label>
